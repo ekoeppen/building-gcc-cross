@@ -15,7 +15,7 @@ SRC_PATH=$TOP/tmp
 BINUTILS_PATH=$SRC_PATH/binutils-2.29
 GCC_PATH=$SRC_PATH/gcc
 NEWLIB_PATH=$SRC_PATH/newlib-2.5.0
-GDB_PATH=$SRC_PATH/gdb-7.10-gpl-2017-src
+GDB_PATH=$SRC_PATH/gdb-8.1-gpl-2018-src
 
 GCC_STAGE1_FLAGS="-static-libstdc++ -static-libgcc -Wl,-headerpad_max_install_names"
 
