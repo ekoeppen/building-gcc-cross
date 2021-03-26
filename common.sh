@@ -6,12 +6,14 @@
 # source tree already had these versions installed via
 # contrib/download_prerequisites.
 
-PATH=/Volumes/Miscellaneous/tmp/opt/gcc-10.1.0/bin:$PATH
-TOP=/Volumes/Miscellaneous
-PREFIX=$TOP/arm/gcc-10.1.0
-BUILD=x86_64-apple-darwin15
+: "${TARGET:=msp430-elf}"
+: "${BUILD:=x86_64-unknown-linux-gnu}"
+: "${SRC_PATH:=../..}"
+: "${NPROC:=$(nproc)}"
 
-SRC_PATH=$TOP/tmp
+PREFIX="${PREFIX:-/opt/GNAT/10.1.0}"/$TARGET
+PATH=$PREFIX/bin:$PATH
+
 BINUTILS_PATH=$SRC_PATH/binutils-2.34
 GCC_PATH=$SRC_PATH/gcc-10.1.0
 NEWLIB_PATH=$SRC_PATH/newlib-3.3.0

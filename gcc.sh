@@ -3,7 +3,6 @@ script_loc=`cd $(dirname $0) && pwd -P`
 . $script_loc/common.sh
 
 $GCC_PATH/configure                                     \
- --build=$BUILD                                         \
  --disable-libada                                       \
  --disable-libcc1                                       \
  --disable-libcilkrts                                   \
@@ -19,9 +18,9 @@ $GCC_PATH/configure                                     \
  --disable-shared                                       \
  --disable-threads                                      \
  --disable-tls                                          \
- --enable-languages="c,c++,ada"                         \
- --prefix=$PREFIX                                       \
- --target=arm-eabi                                      \
+ --enable-languages="c,ada"                             \
+ --prefix=${PREFIX}                                     \
+ --target=${TARGET}                                     \
  --with-gnu-as                                          \
  --with-gnu-ld                                          \
  --with-libgloss                                        \
@@ -31,8 +30,8 @@ $GCC_PATH/configure                                     \
  --without-libiconv-prefix                              \
  $MULTILIB_LIST
 
-make -w -j3
+make -w -j${NPROC}
 
 make -w -C gcc cross-gnattools ada.all.cross
 
-make -w install
+make -w install-strip

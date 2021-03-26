@@ -1,3 +1,5 @@
+#!/bin/bash
+
 script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
@@ -5,12 +7,12 @@ script_loc=`cd $(dirname $0) && pwd -P`
 PATH=$PREFIX/bin:$PATH
 
 $GDB_PATH/configure                             \
- --build=$BUILD                                 \
- --target=arm-eabi                              \
- --prefix=$PREFIX                               \
+ --build=${BUILD}                               \
+ --target=${TARGET}                             \
+ --prefix=${PREFIX}                             \
  --disable-werror
 
-make -w all -j3
+make -w all -j${NPROCS}
 
 cd gdb
 make install

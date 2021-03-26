@@ -1,9 +1,10 @@
+#!/bin/bash
+
 script_loc=`cd $(dirname $0) && pwd -P`
 
 . $script_loc/common.sh
 
 $GCC_PATH/configure                             \
- --build=$BUILD                                 \
  --disable-decimal-float                        \
  --disable-libada                               \
  --disable-libcc1                               \
@@ -22,8 +23,8 @@ $GCC_PATH/configure                             \
  --disable-threads                              \
  --disable-tls                                  \
  --enable-languages="c"                         \
- --prefix=$PREFIX                               \
- --target=arm-eabi                              \
+ --prefix=${PREFIX}                             \
+ --target=${TARGET}                             \
  --with-gnu-as                                  \
  --with-gnu-ld                                  \
  --with-libgloss                                \
@@ -33,6 +34,6 @@ $GCC_PATH/configure                             \
  --without-libiconv-prefix                      \
  $MULTILIB_LIST
 
-make -w -j3 all-gcc
+make -w -j${NPROC} all-gcc
 
-make -w install-gcc
+make -w install-strip-gcc
