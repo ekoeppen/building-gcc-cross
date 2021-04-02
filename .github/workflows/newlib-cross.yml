@@ -1,4 +1,4 @@
-name: Build CI Docker images
+name: Build newlib Docker images
 
 on:
   workflow_dispatch:
@@ -8,7 +8,6 @@ jobs:
   build-arm-eabi:
     environment: build
     runs-on: ubuntu-latest
-    if: false
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -21,10 +20,12 @@ jobs:
       - name: Docker build and push
         uses: docker/build-push-action@v2
         with:
-          file: Dockerfile
+          file: docker/newlib/Dockerfile
           push: true
-          build-args: target=arm-eabi
-          tags: ghcr.io/${{ github.repository }}-arm-eabi:latest
+          build-args: |
+            target=arm-eabi
+            registry=ghcr.io/${{ github.repository_owner }}/
+          tags: ghcr.io/${{ github.repository_owner }}/newlib-arm-eabi:3.3.0
   build-msp430-elf:
     environment: build
     runs-on: ubuntu-latest
@@ -40,7 +41,9 @@ jobs:
       - name: Docker build and push
         uses: docker/build-push-action@v2
         with:
-          file: Dockerfile
+          file: docker/newlib/Dockerfile
           push: true
-          build-args: target=msp430-elf
-          tags: ghcr.io/${{ github.repository }}-msp430-elf:latest
+          build-args: |
+            target=msp430-elf
+            registry=ghcr.io/${{ github.repository_owner }}/
+          tags: ghcr.io/${{ github.repository_owner }}/newlib-msp430-elf:3.3.0

@@ -1,4 +1,6 @@
-FROM gnat-cross-src:10.1.0 as build
+ARG registry
+
+FROM ${registry}gnat-cross-src:10.1.0 as build
 
 ARG target=arm-eabi
 ENV TARGET=$target
@@ -6,12 +8,17 @@ ENV TARGET=$target
 ENV TZ=Europe/Helsinki
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && \
-    apt-get install -y file bash libc-dev make texinfo gnat gprbuild g++ zlib1g-dev
+    apt-get install -y file bash curl gzip \
+    libc-dev make texinfo gnat gprbuild g++ zlib1g-dev
 
 WORKDIR /build
 
 COPY *.sh ./
-RUN mkdir gcc gcc-boot newlib binutils
+
+RUN mkdir gcc gcc-boot newlib binutils && \
+    tar xf gcc-10.1.0.tar.gz && \
+    tar xf binutils-2.34.tar.gz && \
+    cd gcc-10.1.0/ && ./contrib/download_prerequisites
 
 RUN export SRC_PATH=/build && cd /build/binutils && ../binutils.sh && \
     cd /build/gcc && ../gcc.sh
