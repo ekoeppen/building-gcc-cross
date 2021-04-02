@@ -8,6 +8,7 @@ jobs:
   build-arm-eabi:
     environment: build
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -22,4 +23,24 @@ jobs:
         with:
           file: Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+          build-args: target=arm-eabi
+          tags: ghcr.io/${{ github.repository }}-arm-eabi:latest
+  build-msp430-elf:
+    environment: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Docker login
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.ghcr_write }}
+      - name: Docker build and push
+        uses: docker/build-push-action@v2
+        with:
+          file: Dockerfile
+          push: true
+          build-args: target=msp430-elf
+          tags: ghcr.io/${{ github.repository }}-msp430-elf:latest
