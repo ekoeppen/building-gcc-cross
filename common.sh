@@ -11,7 +11,7 @@
 : "${SRC_PATH:=../..}"
 : "${NPROC:=$(nproc)}"
 
-PREFIX="${PREFIX:-/opt/GNAT/10.2.0}"/$TARGET
+PREFIX="${PREFIX:-/opt/GNAT/10.2.0/${TARGET}}"
 PATH=$PREFIX/bin:$PATH
 
 BINUTILS_PATH=$SRC_PATH/binutils-2.34

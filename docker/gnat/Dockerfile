@@ -20,7 +20,7 @@ RUN mkdir gcc gcc-boot newlib binutils && \
     tar xf binutils-2.34.tar.gz && \
     cd gcc-10.2.0/ && ./contrib/download_prerequisites
 
-RUN export SRC_PATH=/build && export CC=gcc-10 && \
+RUN export SRC_PATH=/build && export CC=gcc-10 && export PREFIX=/usr/local && \
     cd /build/binutils && ../binutils.sh && \
     cd /build/gcc && ../gcc.sh
 
@@ -29,4 +29,4 @@ FROM ubuntu:20.04
 RUN apt-get update && \
     apt-get install -y gprbuild
 
-COPY --from=build /opt/GNAT/10.2.0/$target /opt/GNAT/10.2.0/$target
+COPY --from=build /usr/local /usr/local
