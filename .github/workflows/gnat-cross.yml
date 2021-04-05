@@ -22,7 +22,7 @@ jobs:
         with:
           file: docker/src/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/gnat-cross-src:10.1.0
+          tags: ghcr.io/${{ github.repository_owner }}/gnat-cross-src:10.2.0
   build-arm-eabi:
     environment: build
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
           build-args: |
             target=arm-eabi
             registry=ghcr.io/${{ github.repository_owner }}/
-          tags: ghcr.io/${{ github.repository_owner }}/gnat-cross-arm-eabi:10.1.0
+          tags: ghcr.io/${{ github.repository_owner }}/gnat-cross-arm-eabi:10.2.0
   build-msp430-elf:
     environment: build
     runs-on: ubuntu-latest
@@ -66,4 +66,4 @@ jobs:
           build-args: |
             target=msp430-elf
             registry=ghcr.io/${{ github.repository_owner }}/
-          tags: ghcr.io/${{ github.repository_owner }}/gnat-cross-msp430-elf:10.1.0
+          tags: ghcr.io/${{ github.repository_owner }}/gnat-cross-msp430-elf:10.2.0

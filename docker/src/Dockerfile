@@ -5,7 +5,7 @@ RUN apt-get update && \
 
 WORKDIR /build
 
-RUN curl -O https://ftp.gnu.org/gnu/gcc/gcc-10.1.0/gcc-10.1.0.tar.gz && \
+RUN curl -O https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.gz && \
     curl -O https://sourceware.org/pub/newlib/newlib-3.3.0.tar.gz && \
     curl -O https://ftp.gnu.org/gnu/binutils/binutils-2.34.tar.gz
 
