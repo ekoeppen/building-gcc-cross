@@ -27,11 +27,13 @@ RUN cd /build/gprbuild && ./bootstrap.sh --with-xmlada=../xmlada && \
 RUN mkdir gcc gcc-boot newlib binutils && \
     tar xf gcc-10.2.0.tar.gz && \
     tar xf binutils-2.34.tar.gz && \
+    tar xf newlib-3.3.0.tar.gz && \
     cd gcc-10.2.0/ && ./contrib/download_prerequisites
 
 RUN export SRC_PATH=/build && export CC=gcc-10 && export PREFIX=/usr/local && \
     cd /build/binutils && ../binutils.sh && \
-    cd /build/gcc && ../gcc.sh
+    cd /build/gcc && ../gcc.sh && \
+    cd /build/newlib && ../newlib.sh
 
 FROM ubuntu:20.04
 
