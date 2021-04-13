@@ -25,6 +25,7 @@ RUN cd /build/gprbuild-2020-20200429-19BD2-src && bash ./bootstrap.sh --with-xml
     make && make install && \
     cd /build/gprbuild-2020-20200429-19BD2-src && export GPR_PROJECT_PATH=/usr/local/share/gpr && \
     make prefix=/usr/local setup && make all && make install
+COPY patches/compilers-user-rt.xml /usr/local/share/gprconfig/
 
 COPY binutils.sh gcc.sh common.sh patches/gcc-remove-jorvik.patch /build/
 RUN mkdir gcc gcc-boot binutils && \
@@ -50,13 +51,13 @@ RUN tar xf cortex-gnat-rts-r20201014.tar.gz && \
     tar xf componolit-ada-runtime-1.2.0.tar.gz
 RUN cd /build/bb-runtimes && \
     ../bb-runtimes.sh /usr/local/arm-eabi/lib/gnat /build/gcc-9-2020-20200429-19AA7-src/ /build/gcc-9-2020-20200429-19AA7-src/gcc/ada/ \
-        cortex-m0 cortex-m3 cortex-m4 \
+        cortex-m0 cortex-m3 cortex-m4 cortex-m4f \
         stm32f030f4-hsi stm32f070f6-hsi stm32f051k8-hsi stm32f072rb-hsi \
         nucleo_f401re
 
 FROM ubuntu:20.04
 
 COPY --from=build /usr/local /usr/local
-COPY --from=build /build/gcc-9-2020-20200429-19AA7-src/gcc/ada/ /usr/local/arm-eabi/include/rts-sources/
-COPY --from=build /build/gcc-9-2020-20200429-19AA7-src/libgcc/unwind*.h /usr/local/arm-eabi/include/gcc/
+COPY --from=build /build/gcc-9-2020-20200429-19AA7-src/gcc/ada/ /usr/local/include/rts-sources/
+COPY --from=build /build/gcc-9-2020-20200429-19AA7-src/libgcc/unwind*.h /usr/local/include/gcc/
 WORKDIR /build
