@@ -8,7 +8,7 @@ ENV TARGET=$target
 ENV TZ=Europe/Helsinki
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && \
-    apt-get install -y file bash curl gzip patch \
+    apt-get install -y file bash curl gzip patch git \
     libc-dev make texinfo gnat-10 g++ zlib1g-dev python3 flex bison
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 && \
     ln -s /usr/lib/gcc/x86_64-linux-gnu/10 /usr/lib/gcc/x86_64-linux-gnu/10.2.0
@@ -47,13 +47,12 @@ RUN cd /build && mkdir newlib && tar xf newlib-3.3.0.tar.gz
 RUN cd /build/newlib && ../newlib.sh
 
 COPY bb-runtimes.sh ./
-RUN tar xf cortex-gnat-rts-r20201014.tar.gz && \
-    tar xf componolit-ada-runtime-1.2.0.tar.gz
+RUN rm -rf bb-runtimes && git clone --depth 1 --branch community-2020 https://github.com/ekoeppen/bb-runtimes.git
 RUN cd /build/bb-runtimes && \
     ../bb-runtimes.sh /usr/local/arm-eabi/lib/gnat /build/gcc-9-2020-20200429-19AA7-src/ /build/gcc-9-2020-20200429-19AA7-src/gcc/ada/ \
         cortex-m0 cortex-m3 cortex-m4 cortex-m4f \
-        stm32f030f4-hsi stm32f070f6-hsi stm32f051k8-hsi stm32f072rb-hsi \
-        nucleo_f401re
+        stm32f030f4-hsi stm32f070f6-hsi stm32f051k8-hsi stm32f072rb-hsi nucleo_f401re \
+        microbit min-stm32f103
 
 FROM ubuntu:20.04
 
