@@ -11,13 +11,12 @@
 : "${SRC_PATH:=../..}"
 : "${NPROC:=$(nproc)}"
 
-PREFIX="${PREFIX:-/opt/GNAT/9.3.1/${TARGET}}"
+PREFIX="${PREFIX:-/opt/GNAT/10.3.0/${TARGET}}"
 PATH=$PREFIX/bin:$PATH
 
 BINUTILS_PATH=$SRC_PATH/binutils-2.34
-GCC_PATH=$SRC_PATH/gcc-9-2020-20200429-19AA7-src
+GCC_PATH=$SRC_PATH/gcc-10-2021-20210519-19A74-src
 NEWLIB_PATH=$SRC_PATH/newlib-3.3.0
-GDB_PATH=$SRC_PATH/gdb-9.1
 
 GCC_STAGE1_LDFLAGS="-static-libstdc++ -static-libgcc -Wl,-headerpad_max_install_names"
 

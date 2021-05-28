@@ -5,6 +5,7 @@ script_loc=`cd $(dirname $0) && pwd -P`
 . $script_loc/common.sh
 
 $GCC_PATH/configure                             \
+ --build=${BUILD} \
  --disable-decimal-float                        \
  --disable-libada                               \
  --disable-libcc1                               \
