@@ -6,16 +6,17 @@
 # source tree already had these versions installed via
 # contrib/download_prerequisites.
 
-: "${TARGET:=msp430-elf}"
+: "${VERSION:=10.3.0}"
+: "${TARGET:=arm-eabi}"
 : "${BUILD:=x86_64-unknown-linux-gnu}"
-: "${SRC_PATH:=../..}"
+: "${SRC_PATH:=../../gnat-src}"
 : "${NPROC:=$(nproc)}"
 
-PREFIX="${PREFIX:-/opt/GNAT/10.3.0/${TARGET}}"
+PREFIX="${PREFIX:-/opt/GNAT/${VERSION}/${TARGET}}"
 PATH=$PREFIX/bin:$PATH
 
 BINUTILS_PATH=$SRC_PATH/binutils-2.34
-GCC_PATH=$SRC_PATH/gcc-10-2021-20210519-19A74-src
+GCC_PATH=$SRC_PATH/gcc/
 NEWLIB_PATH=$SRC_PATH/newlib-3.3.0
 
 GCC_STAGE1_LDFLAGS="-static-libstdc++ -static-libgcc -Wl,-headerpad_max_install_names"

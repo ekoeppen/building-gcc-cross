@@ -32,7 +32,7 @@ $GCC_PATH/configure                                     \
  $MULTILIB_LIST
 
 make -w -j${NPROC}
-
-make -w -C gcc gnatlib cross-gnattools ada.all.cross
+make -w -j${NPROC} -C gcc cross-gnattools
+make -w -j${NPROC} -C gcc ada.all.cross
 
 make -w install-strip
