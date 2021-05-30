@@ -6,7 +6,7 @@
 # source tree already had these versions installed via
 # contrib/download_prerequisites.
 
-: "${VERSION:=10.3.0}"
+: "${VERSION:=11.1.0}"
 : "${TARGET:=arm-eabi}"
 : "${BUILD:=x86_64-unknown-linux-gnu}"
 : "${SRC_PATH:=../../gnat-src}"
@@ -15,9 +15,9 @@
 PREFIX="${PREFIX:-/opt/GNAT/${VERSION}/${TARGET}}"
 PATH=$PREFIX/bin:$PATH
 
-BINUTILS_PATH=$SRC_PATH/binutils-2.34
-GCC_PATH=$SRC_PATH/gcc/
-NEWLIB_PATH=$SRC_PATH/newlib-3.3.0
+BINUTILS_PATH=$SRC_PATH/binutils-2.36
+GCC_PATH=$SRC_PATH/gcc-releases-gcc-11.1.0
+NEWLIB_PATH=$SRC_PATH/newlib-4.1.0
 
 GCC_STAGE1_LDFLAGS="-static-libstdc++ -static-libgcc -Wl,-headerpad_max_install_names"
 

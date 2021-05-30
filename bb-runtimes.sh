@@ -15,5 +15,5 @@ gnat_dir=$1; shift
 
 for target in $@
 do
-    ./build_rts.py --output ${prefix} --build --rts-src-descriptor ./install/lib/gnat/rts-sources.json "${target}"
+    ./build_rts.py -f --output ${prefix} --build --rts-src-descriptor ./install/lib/gnat/rts-sources.json "${target}"
 done
